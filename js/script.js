@@ -20,9 +20,13 @@ window.addEventListener('DOMContentLoaded', function () {
     popupEn.style.display = 'none';
     overlay.style.display = 'none';
   }
-
-
-  overlay.addEventListener('click', closeModal);
   close.addEventListener('click', closeModal);
+
+  popupEn.addEventListener('click', function (event) {
+
+    if (event.target.closest(".popup_dialog")) return;
+    closeModal();
+
+  });
 
 });
