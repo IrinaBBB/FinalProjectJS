@@ -155,6 +155,13 @@ textarea:focus {
   background: url(../img/glazing/line.png) 0 0 no-repeat;
 }
 
+.hide {
+  display:none;
+}
+.show {
+  display: block;
+}
+
 .arrow {
   position: absolute;
   top: 50%;
