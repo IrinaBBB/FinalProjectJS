@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', function () {
   window.setTimeout(function () {
     popup.style.display = 'block';
     overlay.style.display = 'block';
-  }, 5000);
+  }, 60000);
 
   function closeModal() {
     popup.style.display = 'none';
