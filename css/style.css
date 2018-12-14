@@ -894,6 +894,19 @@ textarea:focus {
   background-color: #ffffff;
 }
 
+.img_works {
+  /*   display: none; */
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    max-height: 550px;
+    z-index: 100;
+  
+}
+
 .popup_close,
 .popup_engineer_close,
 .popup_calc_end_close {

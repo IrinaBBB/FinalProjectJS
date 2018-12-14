@@ -139,8 +139,8 @@ window.addEventListener('DOMContentLoaded', function () {
         decContent = document.querySelector('.decoration_slider'),
         decTabContent = document.querySelectorAll('.dec_tab_content'),
         blueLine = document.querySelectorAll('.blue_line');
-        
-        
+
+
     function hideTabContent(a, tabContent, activeClass) {
         for (let i = a; i < tabContent.length; i++) {
             tabContent[i].classList.remove('show');
@@ -153,7 +153,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    
+
     function hideTabContent2(a, tabContent, activeClass, blueLine) {
         for (let i = a; i < tabContent.length; i++) {
             tabContent[i].classList.remove('show');
@@ -177,7 +177,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function showTabContent2(b, tabContent,activeClass, blueLine) {
+    function showTabContent2(b, tabContent, activeClass, blueLine) {
         if (tabContent[b].classList.contains('hide')) {
             tabContent[b].classList.remove('hide');
             tabContent[b].classList.add('show');
@@ -185,7 +185,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    
+
     slider.addEventListener('click', function (event) {
         let target = event.target;
         if (target && target.classList.contains('tab_link')) {
@@ -199,7 +199,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    decContent.addEventListener('click', function(event) {
+    decContent.addEventListener('click', function (event) {
         let target = event.target;
         if (target && target.classList.contains('dec_tab')) {
             for (let i = 0; i < decTab.length; i++) {
@@ -217,12 +217,31 @@ window.addEventListener('DOMContentLoaded', function () {
             Pictures
     */
 
-    let img2 = document.querySelector('.pic');
+    let img = document.createElement("IMG"),
+        imgLink = document.querySelectorAll('.img_link'),
+        overlay2 = document.querySelector('.overlay');
 
-    console.log(img2);
 
-    img2.addEventListener('click', function() {
+    function closeImage() {
+        img.style.display = 'none';
+        overlay.style.display = 'none';
+    }
 
-    });
+
+    for (let i = 0; i < imgLink.length; i++) {
+        imgLink[i].addEventListener('click', function () {
+            img.setAttribute("src", "img/our_works/big_img/" + (i + 1) + ".png");
+            img.classList.add('img_works');
+
+            document.body.appendChild(img);
+            img.style.display = 'block';
+            overlay.style.display = 'block';
+
+        });
+
+    }
+
+    overlay2.addEventListener('click', closeImage);
 
 });
+
