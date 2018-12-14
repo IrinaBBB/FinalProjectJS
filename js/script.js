@@ -140,20 +140,7 @@ window.addEventListener('DOMContentLoaded', function () {
         decTabContent = document.querySelectorAll('.dec_tab_content'),
         blueLine = document.querySelectorAll('.blue_line');
         
-
-    function hideTabContent(a, tabContent, activeClass) {
-        for (let i = a; i < tabContent.length; i++) {
-            tabContent[i].classList.remove('show');
-            tabContent[i].classList.add('hide');
-            if (tab[i].classList.contains(activeClass)) {
-                tab[i].classList.remove(activeClass);
-            }
-
-
-        }
-    }
-
-    
+        
     function hideTabContent(a, tabContent, activeClass) {
         for (let i = a; i < tabContent.length; i++) {
             tabContent[i].classList.remove('show');
@@ -225,6 +212,17 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    
+
+    /* 
+            Pictures
+    */
+
+    let img2 = document.querySelector('.pic');
+
+    console.log(img2);
+
+    img2.addEventListener('click', function() {
+
+    });
 
 });
