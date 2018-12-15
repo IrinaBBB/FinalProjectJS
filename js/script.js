@@ -241,6 +241,11 @@ window.addEventListener('DOMContentLoaded', function () {
 
     }
 
+    
+    for (let i = 0; i < imgLink.length; i++) {
+        img.addEventListener('click', closeImage);
+    }
+
     overlay2.addEventListener('click', closeImage);
 
 });
