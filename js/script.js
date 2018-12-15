@@ -264,8 +264,7 @@ window.addEventListener('DOMContentLoaded', function () {
         form = document.getElementsByClassName('main_form'),
         input = document.getElementsByTagName('input'),
         statusMessage = document.createElement('div');
-    console.log(input);
-
+    
     for (let i = 0; i < phoneInput.length; i++) {
         phoneInput[i].addEventListener('input', function () {
             this.value = this.value.replace(/[^0-9+]/ig, '');
@@ -279,7 +278,7 @@ window.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             elem.appendChild(statusMessage);
             let formData = new FormData(elem);
-
+           
 
             function postData(data) {
                 return new Promise(function (resolve, reject) {
@@ -299,7 +298,8 @@ window.addEventListener('DOMContentLoaded', function () {
                         }
                     }
 
-                    request.send(data);
+                    request.send(JSON.stringify(data));
+               
 
                 });
             }
@@ -308,7 +308,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 for (let i = 0; i < input.length; i++) {
                     input[i].value = '';
                 }
-            }
+            } 
 
             postData(formData)
                 .then(() => statusMessage.innerHTML = message.loading)
