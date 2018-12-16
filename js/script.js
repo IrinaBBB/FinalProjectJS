@@ -254,31 +254,31 @@ window.addEventListener('DOMContentLoaded', function () {
             Forms
     */
 
-   let message = {
-    loading: 'Загрузка...',
-    success: 'Спасибо! Скоро мы с вами свяжемся!',
-    failure: 'Что-то пошло не так...'
-};
+    let message = {
+        loading: 'Загрузка...',
+        success: 'Спасибо! Скоро мы с вами свяжемся!',
+        failure: 'Что-то пошло не так...'
+    };
 
     let phoneInput = document.querySelectorAll('.user_phone'),
-        form = document.getElementsByClassName('main_form'),
+        form = document.getElementsByClassName('form'),
         input = document.getElementsByTagName('input'),
         statusMessage = document.createElement('div');
-    
+      
     for (let i = 0; i < phoneInput.length; i++) {
         phoneInput[i].addEventListener('input', function () {
             this.value = this.value.replace(/[^0-9+]/ig, '');
         });
     }
 
-  
+
 
     function sendForm(elem) {
         elem.addEventListener('submit', function (e) {
             e.preventDefault();
             elem.appendChild(statusMessage);
             let formData = new FormData(elem);
-           
+
 
             function postData(data) {
                 return new Promise(function (resolve, reject) {
@@ -298,8 +298,8 @@ window.addEventListener('DOMContentLoaded', function () {
                         }
                     }
 
-                    request.send(JSON.stringify(data));
-               
+                    request.send(data);
+
 
                 });
             }
@@ -308,7 +308,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 for (let i = 0; i < input.length; i++) {
                     input[i].value = '';
                 }
-            } 
+            }
 
             postData(formData)
                 .then(() => statusMessage.innerHTML = message.loading)
@@ -323,8 +323,5 @@ window.addEventListener('DOMContentLoaded', function () {
     for (let i = 0; i < form.length; i++) {
         sendForm(form[i]);
     }
-    
-    
-
 
 });
