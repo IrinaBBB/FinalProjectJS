@@ -273,14 +273,21 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 
+
+
     function sendForm(elem) {
         elem.addEventListener('submit', function (e) {
             e.preventDefault();
             elem.appendChild(statusMessage);
             let formData = new FormData(elem);
+            let obj = {};
+            formData.forEach(function (value, key) {
+                obj[key] = value;
+            });
+            let json = JSON.stringify(obj);
 
 
-            function postData(data) {
+            function postData() {
                 return new Promise(function (resolve, reject) {
                     let request = new XMLHttpRequest();
 
@@ -298,7 +305,7 @@ window.addEventListener('DOMContentLoaded', function () {
                         }
                     }
 
-                    request.send(data);
+                    request.send(json);
 
 
                 });
@@ -350,17 +357,17 @@ window.addEventListener('DOMContentLoaded', function () {
         checkboxTag = document.querySelectorAll('.checkbox'),
         finalButton = document.querySelector('.final');
 
-        let calcData = {};
+    let calcData = {};
 
 
 
-        width.addEventListener('input', function () {
-            this.value = this.value.replace(/[^0-9]/ig, '');
-        });
+    width.addEventListener('input', function () {
+        this.value = this.value.replace(/[^0-9]/ig, '');
+    });
 
-        height.addEventListener('input', function () {
-            this.value = this.value.replace(/[^0-9]/ig, '');
-        });
+    height.addEventListener('input', function () {
+        this.value = this.value.replace(/[^0-9]/ig, '');
+    });
 
 
 
@@ -376,15 +383,15 @@ window.addEventListener('DOMContentLoaded', function () {
 
     for (let i = 0; i < glazingBtn.length; i++) {
         glazingBtn[i].addEventListener('click', openCalcModal);
-        
+
 
     }
-    
+
 
     closeCalc.addEventListener('click', closeCalcModal);
 
-    
-        
+
+
 
     function hideCalcContent(a) {
         for (let i = a; i < balconContents.length; i++) {
@@ -416,7 +423,7 @@ window.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    calcButton.addEventListener('click', function() {
+    calcButton.addEventListener('click', function () {
         calcProfile.style.display = 'block';
         overlay.style.display = 'block';
         popUpCalc.style.display = 'none';
@@ -426,7 +433,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     });
 
-    calcMiddleButton.addEventListener('click', function() {
+    calcMiddleButton.addEventListener('click', function () {
         calcEnd.style.display = 'block';
         overlay.style.display = 'block';
         calcProfile.style.display = 'none';
@@ -434,38 +441,68 @@ window.addEventListener('DOMContentLoaded', function () {
         calcData.warm = checkboxTag[1].checked;
         calcData.type = document.querySelector('#view_type').value;
         console.log(calcData);
-    
+
     });
 
-    finalButton.addEventListener('click', function(e) {
+    finalButton.addEventListener('click', function (e) {
         e.preventDefault();
         document.querySelector('.final_form').appendChild(statusMessage);
         calcData.name = document.querySelector('.final_name').value;
         calcData.phone = document.querySelector('.final_phone').value;
-        console.log(calcData);
+
+        let finalJson = JSON.stringify(calcData);
+        
+
+        function postFinalData() {
+            return new Promise(function (resolve, reject) {
+                let request = new XMLHttpRequest();
+
+                request.open('POST', 'server.php');
+                request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+                request.onreadystatechange = function () {
+                    if (request.readyState < 4) {
+                        resolve();
+                    } else if (request.readyState === 4) {
+                        if (request.status == 200 && request.status < 3) {
+                            resolve();
+                        } else {
+                            reject();
+                        }
+                    }
+                }
+
+                request.send(finalJson);
+            });
+        }
+
+        function clearInput() {
+            for (let i = 0; i < input.length; i++) {
+                input[i].value = '';
+            }
+        }
         postFinalData(calcData)
-        .then(() => statusMessage.innerHTML = message.loading)
-        .then(() => statusMessage.innerHTML = message.success)
-        .catch(() => statusMessage.innerHTML = message.failure)
-        .then(clearInput);
+            .then(() => statusMessage.innerHTML = message.loading)
+            .then(() => statusMessage.innerHTML = message.success)
+            .catch(() => statusMessage.innerHTML = message.failure)
+            .then(clearInput);
     });
 
-    finalClose.addEventListener('click', function() {
+    finalClose.addEventListener('click', function () {
         calcEnd.style.display = 'none';
         overlay.style.display = 'none';
     });
-   
-    middleClose.addEventListener('click', function() {
+
+    middleClose.addEventListener('click', function () {
         calcProfile.style.display = 'none';
         overlay.style.display = 'none';
     });
 
-   
+
 
 
 
     for (let i = 0; i < checkbox.length; i++) {
-        checkbox[i].addEventListener('click', function() {
+        checkbox[i].addEventListener('click', function () {
             for (let i = 0; i < checkboxTag.length; i++) {
                 checkboxTag[i].checked = false;
             }
@@ -475,32 +512,6 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    function postFinalData(data) {
-        return new Promise(function (resolve, reject) {
-            let request = new XMLHttpRequest();
 
-            request.open('POST', 'server.php');
-            request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-            request.onreadystatechange = function () {
-                if (request.readyState < 4) {
-                    resolve();
-                } else if (request.readyState === 4) {
-                    if (request.status == 200 && request.status < 3) {
-                        resolve();
-                    } else {
-                        reject();
-                    }
-                }
-            }
-
-            request.send(data);
-        });
-    }
-
-    function clearInput() {
-        for (let i = 0; i < input.length; i++) {
-            input[i].value = '';
-        }
-    }
 
 });
