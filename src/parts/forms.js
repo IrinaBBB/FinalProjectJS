@@ -106,7 +106,9 @@ let popUpCalc = document.querySelector('.popup_calc'),
   height = document.querySelector('#height'),
   checkbox = document.querySelectorAll('.checkbox-custom'),
   checkboxTag = document.querySelectorAll('.checkbox'),
-  finalButton = document.querySelector('.final');
+  finalButton = document.querySelector('.final'),
+  overlay = document.querySelector('.overlay');
+
 
 let calcData = {};
 
