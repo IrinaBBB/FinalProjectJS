@@ -127,11 +127,15 @@ height.addEventListener('input', function () {
 function openCalcModal() {
   popUpCalc.style.display = 'block';
   overlay.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+
 }
 
 function closeCalcModal() {
   popUpCalc.style.display = 'none';
   overlay.style.display = 'none';
+  document.body.style.overflow = '';
+
 }
 
 for (let i = 0; i < glazingBtn.length; i++) {
@@ -179,21 +183,21 @@ infoBalcon.addEventListener('click', function (event) {
 calcButton.addEventListener('click', function () {
   calcProfile.style.display = 'block';
   overlay.style.display = 'block';
+  document.body.style.overflow = 'hidden';
   popUpCalc.style.display = 'none';
   calcData.calcWidth = width.value;
   calcData.calcHeight = height.value;
-  console.log(calcData);
 
 });
 
 calcMiddleButton.addEventListener('click', function () {
   calcEnd.style.display = 'block';
   overlay.style.display = 'block';
+  document.body.style.overflow = 'hidden';
   calcProfile.style.display = 'none';
   calcData.cold = checkboxTag[0].checked;
   calcData.warm = checkboxTag[1].checked;
   calcData.type = document.querySelector('#view_type').value;
-  console.log(calcData);
 
 });
 
@@ -202,6 +206,8 @@ finalButton.addEventListener('click', function (e) {
   document.querySelector('.final_form').appendChild(statusMessage);
   calcData.name = document.querySelector('.final_name').value;
   calcData.phone = document.querySelector('.final_phone').value;
+  document.body.style.overflow = '';
+
 
   let finalJson = JSON.stringify(calcData);
 
@@ -243,11 +249,15 @@ finalButton.addEventListener('click', function (e) {
 finalClose.addEventListener('click', function () {
   calcEnd.style.display = 'none';
   overlay.style.display = 'none';
+  document.body.style.overflow = '';
+
 });
 
 middleClose.addEventListener('click', function () {
   calcProfile.style.display = 'none';
   overlay.style.display = 'none';
+  document.body.style.overflow = '';
+
 });
 
 

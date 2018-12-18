@@ -19,11 +19,14 @@ function popUps() {
  window.setTimeout(function () {
    popup.style.display = 'block';
    overlay.style.display = 'block';
+   document.body.style.overflow = 'hidden';
+
  }, 60000);
 
  function closeModal() {
    popup.style.display = 'none';
    overlay.style.display = 'none';
+   document.body.style.overflow = '';
  }
 
  close.addEventListener('click', closeModal);
@@ -39,11 +42,15 @@ function popUps() {
  function openEnModal() {
    popupEn.style.display = 'block';
    overlay.style.display = 'block';
+   document.body.style.overflow = 'hidden';
+
  }
 
  function closeEnModal() {
    popupEn.style.display = 'none';
    overlay.style.display = 'none';
+   document.body.style.overflow = '';
+
  }
 
 
